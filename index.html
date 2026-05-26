@@ -778,6 +778,11 @@
         document.getElementById('back-to-top').classList.toggle('visible', window.scrollY > 600);
     });
 
+    // Back to top click handler
+    document.getElementById('back-to-top').addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
     // Hamburger toggle
     navToggle.addEventListener('click', () => {
         navToggle.classList.toggle('active');
