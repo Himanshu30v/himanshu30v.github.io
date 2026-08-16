@@ -1001,6 +1001,56 @@
             });
         });
     }
+
+    /* ===== MAGNETIC HOVER EFFECTS (desktop only) ===== */
+    if (window.innerWidth > 768) {
+        const magneticElements = document.querySelectorAll(
+            '.btn, .hero-socials a, .contact-socials a, .nav-logo, #back-to-top'
+        );
+
+        magneticElements.forEach(el => {
+            el.style.transition = el.style.transition
+                ? el.style.transition + ', transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                : 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                const deltaX = (e.clientX - centerX) * 0.35;
+                const deltaY = (e.clientY - centerY) * 0.35;
+
+                // Preserve existing transforms (like scale on hover)
+                const existingTransform = window.getComputedStyle(el).transform;
+                if (existingTransform && existingTransform !== 'none') {
+                    el.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(1.05)`;
+                } else {
+                    el.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+                }
+            });
+
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = '';
+            });
+        });
+
+        // Magnetic effect for nav links with underline preserved
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('mousemove', (e) => {
+                const rect = link.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                const deltaX = (e.clientX - centerX) * 0.2;
+                const deltaY = (e.clientY - centerY) * 0.2;
+                link.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+                link.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.3s';
+            });
+
+            link.addEventListener('mouseleave', () => {
+                link.style.transform = '';
+            });
+        });
+    }
 </script>
 
 <!-- Particles JS -->
