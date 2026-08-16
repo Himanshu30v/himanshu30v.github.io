@@ -112,16 +112,16 @@
         @keyframes hero-slide-up{to{opacity:1;transform:translateY(0);}}
 
         /* Profile Portrait with Neon Purple Aura & Rings */
-        .profile-container{position:relative;width:240px;height:250px;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;background:transparent;}
-        .profile-neon-aura{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:250px;height:250px;border-radius:50%;background:radial-gradient(circle, rgba(147,51,234,0.45) 0%, rgba(124,58,237,0.2) 50%, transparent 75%);filter:blur(35px);z-index:1;pointer-events:none;}
-        .profile-neon-ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:215px;height:215px;border-radius:50%;border:1.5px solid rgba(168,85,247,0.45);box-shadow:0 0 25px rgba(147,51,234,0.35), inset 0 0 15px rgba(147,51,234,0.25);z-index:1;pointer-events:none;animation:pulse-ring 4s ease-in-out infinite alternate;}
-        .profile-neon-ring-2{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(1.15);width:215px;height:215px;border-radius:50%;border:1px dashed rgba(192,132,252,0.25);z-index:1;pointer-events:none;animation:rotate-ring 30s linear infinite;}
+        .profile-container{position:relative;width:250px;height:260px;margin:0 auto 20px;display:flex;align-items:flex-end;justify-content:center;background:transparent;}
+        .profile-neon-aura{position:absolute;top:46%;left:50%;transform:translate(-50%,-50%);width:250px;height:250px;border-radius:50%;background:radial-gradient(circle, rgba(147,51,234,0.45) 0%, rgba(124,58,237,0.2) 50%, transparent 75%);filter:blur(35px);z-index:1;pointer-events:none;}
+        .profile-neon-ring{position:absolute;top:46%;left:50%;transform:translate(-50%,-50%);width:220px;height:220px;border-radius:50%;border:1.5px solid rgba(168,85,247,0.45);box-shadow:0 0 25px rgba(147,51,234,0.35), inset 0 0 15px rgba(147,51,234,0.25);z-index:1;pointer-events:none;animation:pulse-ring 4s ease-in-out infinite alternate;}
+        .profile-neon-ring-2{position:absolute;top:46%;left:50%;transform:translate(-50%,-50%) scale(1.15);width:220px;height:220px;border-radius:50%;border:1px dashed rgba(192,132,252,0.25);z-index:1;pointer-events:none;animation:rotate-ring 30s linear infinite;}
 
         @keyframes pulse-ring{0%{transform:translate(-50%,-50%) scale(0.96);opacity:0.6;}100%{transform:translate(-50%,-50%) scale(1.04);opacity:1;}}
         @keyframes rotate-ring{from{transform:translate(-50%,-50%) scale(1.15) rotate(0deg);}to{transform:translate(-50%,-50%) scale(1.15) rotate(360deg);}}
 
-        .profile-photo-wrapper{position:relative;z-index:2;width:210px;height:240px;display:flex;align-items:center;justify-content:center;background:transparent;}
-        .profile-photo-wrapper img{width:100%;height:100%;object-fit:contain;object-position:top center;filter:drop-shadow(0 12px 25px rgba(0,0,0,0.5));background:transparent;}
+        .profile-photo-wrapper{position:relative;z-index:2;width:225px;height:255px;display:flex;align-items:flex-end;justify-content:center;background:transparent;overflow:hidden;border-bottom-left-radius:110px;border-bottom-right-radius:110px;}
+        .profile-photo-wrapper img{width:100%;height:100%;object-fit:cover;object-position:top center;transform:scale(1.18);transform-origin:top center;filter:drop-shadow(0 12px 25px rgba(0,0,0,0.5));background:transparent;}
 
         /* Floating decorative particle dots */
         .profile-deco{position:absolute;border-radius:50%;}
@@ -360,8 +360,8 @@
 
             #hero{min-height:100svh;padding:100px 20px 80px;}
             .hero-content h1{font-size:2.4rem;}
-            .profile-container{width:200px;height:220px;}
-            .profile-photo-wrapper{width:160px;height:190px;}
+            .profile-container{width:220px;height:230px;}
+            .profile-photo-wrapper{width:195px;height:220px;border-bottom-left-radius:95px;border-bottom-right-radius:95px;}
             .profile-neon-aura,.profile-neon-ring{width:190px;height:190px;}
 
             section{padding:70px 5%;}
