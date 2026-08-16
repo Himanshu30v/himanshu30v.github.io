@@ -111,13 +111,10 @@
         .hero-entrance-6{animation-delay:1.2s;}
         @keyframes hero-slide-up{to{opacity:1;transform:translateY(0);}}
 
-        /* Profile Image Ring + Orbit container */
+        /* Profile Image + Orbit container */
         .profile-container{position:relative;width:260px;height:260px;margin:0 auto 30px;}
         .profile-ring{position:relative;width:200px;height:200px;margin:0 auto;border-radius:50%;}
-        .profile-ring::before{content:'';position:absolute;inset:-6px;border-radius:50%;background:conic-gradient(from 0deg,var(--violet),var(--pink),var(--cyan),var(--emerald),var(--violet));animation:ring-spin 4s linear infinite;}
-        .profile-ring img{position:relative;width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:top;border:6px solid var(--bg-primary);background:radial-gradient(circle at 50% 40%, rgba(124,58,237,0.2), var(--bg-primary) 70%);}
-        @keyframes ring-spin{to{transform:rotate(360deg);}}
-        .profile-ring::after{content:'';position:absolute;inset:-6px;border-radius:50%;background:conic-gradient(from 0deg,var(--violet),var(--pink),var(--cyan),var(--emerald),var(--violet));filter:blur(20px);opacity:0.5;animation:ring-spin 4s linear infinite;z-index:-1;}
+        .profile-ring img{position:relative;width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:top;border:none;background:transparent;}
 
         /* Decorative floating dots around profile */
         .profile-deco{position:absolute;border-radius:50%;}
