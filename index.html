@@ -86,8 +86,12 @@
            HERO SECTION
            ══════════════════════════════════════════════ */
         #hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:100px 20px 60px;}
+
+        /* Film grain texture overlay */
+        .hero-grain{position:absolute;inset:0;z-index:3;pointer-events:none;opacity:0.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:128px 128px;}
+
         .hero-mesh{position:absolute;inset:0;overflow:hidden;}
-        .blob{position:absolute;border-radius:50%;filter:blur(100px);opacity:0.5;will-change:transform;}
+        .blob{position:absolute;border-radius:50%;filter:blur(100px);opacity:0.5;will-change:transform;transition:transform 0.15s ease-out;}
         .blob-1{width:500px;height:500px;background:var(--violet);top:-15%;left:-10%;animation:blob-move1 25s ease-in-out infinite alternate;}
         .blob-2{width:400px;height:400px;background:var(--pink);bottom:-10%;right:-5%;animation:blob-move2 20s ease-in-out infinite alternate;}
         .blob-3{width:350px;height:350px;background:var(--cyan);top:40%;left:45%;animation:blob-move3 22s ease-in-out infinite alternate;}
@@ -95,18 +99,45 @@
         @keyframes blob-move2{0%{transform:translate(0,0) scale(1);}100%{transform:translate(-60px,-40px) scale(1.1);}}
         @keyframes blob-move3{0%{transform:translate(0,0) scale(1);}100%{transform:translate(-40px,60px) scale(0.9);}}
 
-        .hero-content{position:relative;z-index:2;max-width:750px;}
+        .hero-content{position:relative;z-index:4;max-width:750px;}
 
-        /* Profile Image Ring */
-        .profile-ring{position:relative;width:180px;height:180px;margin:0 auto 30px;border-radius:50%;}
+        /* Staggered entrance animations */
+        .hero-entrance{opacity:0;transform:translateY(40px);animation:hero-slide-up 0.8s cubic-bezier(0.16,1,0.3,1) forwards;}
+        .hero-entrance-1{animation-delay:0.2s;}
+        .hero-entrance-2{animation-delay:0.45s;}
+        .hero-entrance-3{animation-delay:0.65s;}
+        .hero-entrance-4{animation-delay:0.85s;}
+        .hero-entrance-5{animation-delay:1.05s;}
+        .hero-entrance-6{animation-delay:1.2s;}
+        @keyframes hero-slide-up{to{opacity:1;transform:translateY(0);}}
+
+        /* Profile Image Ring + Orbit container */
+        .profile-container{position:relative;width:220px;height:220px;margin:0 auto 30px;}
+        .profile-ring{position:relative;width:180px;height:180px;margin:0 auto;border-radius:50%;}
         .profile-ring::before{content:'';position:absolute;inset:-5px;border-radius:50%;background:conic-gradient(from 0deg,var(--violet),var(--pink),var(--cyan),var(--violet));animation:ring-spin 4s linear infinite;}
         .profile-ring img{position:relative;width:100%;height:100%;border-radius:50%;object-fit:cover;border:5px solid var(--bg-primary);}
         @keyframes ring-spin{to{transform:rotate(360deg);}}
         .profile-ring::after{content:'';position:absolute;inset:-5px;border-radius:50%;background:conic-gradient(from 0deg,var(--violet),var(--pink),var(--cyan),var(--violet));filter:blur(15px);opacity:0.4;animation:ring-spin 4s linear infinite;z-index:-1;}
 
+        /* Orbiting tech icons */
+        .orbit-ring{position:absolute;top:50%;left:50%;width:220px;height:220px;margin-left:-110px;margin-top:-110px;border-radius:50%;border:1px dashed rgba(255,255,255,0.06);animation:orbit-spin 20s linear infinite;}
+        .orbit-icon{position:absolute;width:36px;height:36px;border-radius:50%;background:rgba(3,0,20,0.85);backdrop-filter:blur(8px);border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;font-size:0.85rem;color:var(--text-secondary);animation:orbit-counter-spin 20s linear infinite;box-shadow:0 4px 15px rgba(0,0,0,0.4);}
+        .orbit-icon:nth-child(1){top:-18px;left:50%;margin-left:-18px;color:var(--cyan);}
+        .orbit-icon:nth-child(2){top:50%;right:-18px;margin-top:-18px;color:var(--pink);}
+        .orbit-icon:nth-child(3){bottom:-18px;left:50%;margin-left:-18px;color:var(--emerald);}
+        .orbit-icon:nth-child(4){top:50%;left:-18px;margin-top:-18px;color:var(--amber);}
+        @keyframes orbit-spin{to{transform:rotate(360deg);}}
+        @keyframes orbit-counter-spin{to{transform:rotate(-360deg);}}
+
+        /* Animated gradient name */
         .hero-content h1{font-family:var(--font-heading);font-size:3.5rem;font-weight:700;line-height:1.2;margin-bottom:10px;}
-        .hero-name-gradient{background:linear-gradient(135deg,var(--cyan),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+        .hero-name-gradient{background:linear-gradient(270deg,var(--cyan),var(--pink),var(--violet),var(--cyan));background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradient-shift 6s ease infinite;}
+        @keyframes gradient-shift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
         .hero-greeting{display:block;font-size:1.2rem;font-weight:400;color:var(--text-secondary);margin-bottom:5px;font-family:var(--font-body);}
+
+        /* Availability badge */
+        .availability-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);padding:6px 18px;border-radius:50px;font-size:0.8rem;color:var(--emerald);font-weight:500;margin-bottom:20px;letter-spacing:0.5px;}
+        .availability-badge .live-dot{width:8px;height:8px;border-radius:50%;background:var(--emerald);box-shadow:0 0 8px var(--emerald);animation:pulse-dot 2s infinite;}
 
         /* Typewriter */
         .typewriter-wrap{min-height:36px;margin-bottom:25px;font-size:1.15rem;color:var(--text-secondary);}
@@ -328,7 +359,14 @@
 
             #hero{min-height:100svh;padding:100px 20px 80px;}
             .hero-content h1{font-size:2.4rem;}
+            .profile-container{width:180px;height:180px;}
             .profile-ring{width:140px;height:140px;}
+            .orbit-ring{width:180px;height:180px;margin-left:-90px;margin-top:-90px;}
+            .orbit-icon{width:30px;height:30px;font-size:0.75rem;}
+            .orbit-icon:nth-child(1){top:-15px;margin-left:-15px;}
+            .orbit-icon:nth-child(2){right:-15px;margin-top:-15px;}
+            .orbit-icon:nth-child(3){bottom:-15px;margin-left:-15px;}
+            .orbit-icon:nth-child(4){left:-15px;margin-top:-15px;}
 
             section{padding:70px 5%;}
             .section-header h2{font-size:2rem;}
@@ -391,24 +429,39 @@
 
 <!-- ═══════════ HERO ═══════════ -->
 <header id="hero">
+    <div class="hero-grain"></div>
     <div id="particles-js" style="position:absolute; width:100%; height:100%; top:0; left:0; z-index:1;"></div>
     <div class="hero-mesh" style="opacity: 0.5; z-index: 0;">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
+        <div class="blob blob-1" id="blob1"></div>
+        <div class="blob blob-2" id="blob2"></div>
+        <div class="blob blob-3" id="blob3"></div>
     </div>
     <div class="hero-content">
-        <div class="profile-ring">
-            <img src="pic.jpg" alt="Himanshu Kumar Verma" width="180" height="180">
+        <div class="profile-container hero-entrance hero-entrance-1">
+            <div class="profile-ring">
+                <img src="pic.jpg" alt="Himanshu Kumar Verma" width="180" height="180">
+            </div>
+            <div class="orbit-ring">
+                <span class="orbit-icon" title="Python"><i class="fab fa-python"></i></span>
+                <span class="orbit-icon" title="AWS"><i class="fab fa-aws"></i></span>
+                <span class="orbit-icon" title="Linux"><i class="fab fa-linux"></i></span>
+                <span class="orbit-icon" title="GitHub"><i class="fab fa-github"></i></span>
+            </div>
         </div>
-        <h1>
+        <div class="hero-entrance hero-entrance-2">
+            <div class="availability-badge">
+                <span class="live-dot"></span>
+                Available for Opportunities
+            </div>
+        </div>
+        <h1 class="hero-entrance hero-entrance-3">
             <span class="hero-greeting">Hello, I'm</span>
             <span class="hero-name-gradient">Himanshu Kumar Verma</span>
         </h1>
-        <div class="typewriter-wrap">
+        <div class="typewriter-wrap hero-entrance hero-entrance-4">
             <span id="typewriter"></span>
         </div>
-        <div class="hero-ctas">
+        <div class="hero-ctas hero-entrance hero-entrance-5">
             <a href="Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
                 <i class="fas fa-download"></i> Resume
             </a>
@@ -416,7 +469,7 @@
                 <i class="fas fa-paper-plane"></i> Get in Touch
             </a>
         </div>
-        <div class="hero-socials">
+        <div class="hero-socials hero-entrance hero-entrance-6">
             <a href="https://www.linkedin.com/in/himanshu-verma30" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
             <a href="https://github.com/Himanshu30v" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
             <a href="https://www.instagram.com/himanshu30v" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -750,12 +803,23 @@
      JAVASCRIPT
      ═══════════════════════════════════════════════════ -->
 <script>
-    /* ===== CURSOR GLOW ===== */
+    /* ===== CURSOR GLOW + BLOB PARALLAX ===== */
     const cursorGlow = document.getElementById('cursor-glow');
+    const blob1 = document.getElementById('blob1');
+    const blob2 = document.getElementById('blob2');
+    const blob3 = document.getElementById('blob3');
+
     if (window.innerWidth > 768 && cursorGlow) {
         document.addEventListener('mousemove', (e) => {
             cursorGlow.style.left = e.clientX + 'px';
             cursorGlow.style.top = e.clientY + 'px';
+
+            // Parallax blobs — shift based on mouse position
+            const mx = (e.clientX / window.innerWidth - 0.5) * 2;
+            const my = (e.clientY / window.innerHeight - 0.5) * 2;
+            if (blob1) blob1.style.transform = `translate(${mx * 30}px, ${my * 20}px)`;
+            if (blob2) blob2.style.transform = `translate(${mx * -20}px, ${my * -25}px)`;
+            if (blob3) blob3.style.transform = `translate(${mx * 15}px, ${my * -15}px)`;
         });
     }
 
