@@ -111,17 +111,17 @@
         .hero-entrance-6{animation-delay:1.2s;}
         @keyframes hero-slide-up{to{opacity:1;transform:translateY(0);}}
 
-        /* Profile Portrait with Neon Purple Aura & Rings */
-        .profile-container{position:relative;width:250px;height:260px;margin:0 auto 20px;display:flex;align-items:flex-end;justify-content:center;background:transparent;}
-        .profile-neon-aura{position:absolute;top:46%;left:50%;transform:translate(-50%,-50%);width:250px;height:250px;border-radius:50%;background:radial-gradient(circle, rgba(147,51,234,0.45) 0%, rgba(124,58,237,0.2) 50%, transparent 75%);filter:blur(35px);z-index:1;pointer-events:none;}
-        .profile-neon-ring{position:absolute;top:46%;left:50%;transform:translate(-50%,-50%);width:220px;height:220px;border-radius:50%;border:1.5px solid rgba(168,85,247,0.45);box-shadow:0 0 25px rgba(147,51,234,0.35), inset 0 0 15px rgba(147,51,234,0.25);z-index:1;pointer-events:none;animation:pulse-ring 4s ease-in-out infinite alternate;}
-        .profile-neon-ring-2{position:absolute;top:46%;left:50%;transform:translate(-50%,-50%) scale(1.15);width:220px;height:220px;border-radius:50%;border:1px dashed rgba(192,132,252,0.25);z-index:1;pointer-events:none;animation:rotate-ring 30s linear infinite;}
+        /* Profile Portrait fully contained inside Neon Ring */
+        .profile-container{position:relative;width:240px;height:240px;margin:0 auto 25px;display:flex;align-items:center;justify-content:center;background:transparent;}
+        .profile-neon-aura{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:250px;height:250px;border-radius:50%;background:radial-gradient(circle, rgba(147,51,234,0.45) 0%, rgba(124,58,237,0.2) 50%, transparent 75%);filter:blur(35px);z-index:1;pointer-events:none;}
+        .profile-neon-ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:220px;height:220px;border-radius:50%;border:2px solid rgba(168,85,247,0.6);box-shadow:0 0 25px rgba(147,51,234,0.45), inset 0 0 15px rgba(147,51,234,0.3);z-index:3;pointer-events:none;animation:pulse-ring 4s ease-in-out infinite alternate;}
+        .profile-neon-ring-2{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(1.12);width:220px;height:220px;border-radius:50%;border:1px dashed rgba(192,132,252,0.25);z-index:1;pointer-events:none;animation:rotate-ring 30s linear infinite;}
 
-        @keyframes pulse-ring{0%{transform:translate(-50%,-50%) scale(0.96);opacity:0.6;}100%{transform:translate(-50%,-50%) scale(1.04);opacity:1;}}
-        @keyframes rotate-ring{from{transform:translate(-50%,-50%) scale(1.15) rotate(0deg);}to{transform:translate(-50%,-50%) scale(1.15) rotate(360deg);}}
+        @keyframes pulse-ring{0%{transform:translate(-50%,-50%) scale(0.97);opacity:0.7;}100%{transform:translate(-50%,-50%) scale(1.03);opacity:1;}}
+        @keyframes rotate-ring{from{transform:translate(-50%,-50%) scale(1.12) rotate(0deg);}to{transform:translate(-50%,-50%) scale(1.12) rotate(360deg);}}
 
-        .profile-photo-wrapper{position:relative;z-index:2;width:225px;height:255px;display:flex;align-items:flex-end;justify-content:center;background:transparent;overflow:hidden;border-bottom-left-radius:110px;border-bottom-right-radius:110px;}
-        .profile-photo-wrapper img{width:100%;height:100%;object-fit:cover;object-position:top center;transform:scale(1.18);transform-origin:top center;filter:drop-shadow(0 12px 25px rgba(0,0,0,0.5));background:transparent;}
+        .profile-photo-wrapper{position:relative;z-index:2;width:216px;height:216px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle, rgba(124,58,237,0.2) 0%, rgba(3,0,20,0.6) 80%);}
+        .profile-photo-wrapper img{width:100%;height:100%;object-fit:cover;object-position:center 15%;transform:scale(1.25);transform-origin:center 20%;filter:drop-shadow(0 8px 16px rgba(0,0,0,0.5));}
 
         /* Floating decorative particle dots */
         .profile-deco{position:absolute;border-radius:50%;}
@@ -360,9 +360,9 @@
 
             #hero{min-height:100svh;padding:100px 20px 80px;}
             .hero-content h1{font-size:2.4rem;}
-            .profile-container{width:220px;height:230px;}
-            .profile-photo-wrapper{width:195px;height:220px;border-bottom-left-radius:95px;border-bottom-right-radius:95px;}
-            .profile-neon-aura,.profile-neon-ring{width:190px;height:190px;}
+            .profile-container{width:200px;height:200px;}
+            .profile-photo-wrapper{width:180px;height:180px;border-radius:50%;}
+            .profile-neon-aura,.profile-neon-ring{width:184px;height:184px;}
 
             section{padding:70px 5%;}
             .section-header h2{font-size:2rem;}
