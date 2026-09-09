@@ -792,17 +792,23 @@
 
         <div class="contact-form-card reveal reveal-delay-2">
             <h3>Send a Message</h3>
-            <form id="contact-form" onsubmit="sendMailto(event)">
-                <input type="text" id="mail-name" class="form-input" placeholder="Your Name" required aria-label="Your Name" style="margin-bottom:15px;">
-                <input type="email" id="mail-email" class="form-input" placeholder="Your Email" required aria-label="Your Email" style="margin-bottom:15px;">
-                <input type="text" id="mail-subject" class="form-input" placeholder="Subject" required aria-label="Subject" style="margin-bottom:15px;">
-                <textarea id="mail-message" class="form-input" rows="5" placeholder="Your Message..." required aria-label="Your Message" style="margin-bottom:20px;"></textarea>
-                <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-envelope"></i> Send via Email
+            <form id="contact-form" action="https://formsubmit.co/himanshu30v6663@gmail.com" method="POST">
+                <!-- Formsubmit Config -->
+                <input type="hidden" name="_subject" value="🚀 New Message from Portfolio — Himanshu Kumar Verma">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="https://himanshu30v.github.io/#contact">
+
+                <input type="text" name="Name" class="form-input" placeholder="Your Name" required aria-label="Your Name" style="margin-bottom:15px;">
+                <input type="email" name="Email" class="form-input" placeholder="Your Email" required aria-label="Your Email" style="margin-bottom:15px;">
+                <input type="text" name="Subject" class="form-input" placeholder="Subject" required aria-label="Subject" style="margin-bottom:15px;">
+                <textarea name="Message" class="form-input" rows="5" placeholder="Your Message..." required aria-label="Your Message" style="margin-bottom:20px;"></textarea>
+                <button type="submit" id="submit-btn" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i> Send Message
                 </button>
             </form>
             <div id="form-status">
-                <i class="fas fa-check-circle" style="margin-right:6px;"></i> Your email client has been opened. Send the email to complete!
+                <i class="fas fa-check-circle" style="margin-right:6px;"></i> Message sent successfully! I'll get back to you soon.
             </div>
         </div>
     </div>
@@ -1040,20 +1046,7 @@
     }
     loadGitHubRepos();
 
-    /* ===== CONTACT FORM — Direct Mailto ===== */
-    function sendMailto(e) {
-        e.preventDefault();
-        const name = document.getElementById('mail-name').value.trim();
-        const email = document.getElementById('mail-email').value.trim();
-        const subject = document.getElementById('mail-subject').value.trim();
-        const message = document.getElementById('mail-message').value.trim();
-        const body = `Hi Himanshu,\n\nName: ${name}\nEmail: ${email}\n\n${message}`;
-        const mailtoLink = `mailto:himanshu30v6663@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        window.open(mailtoLink, '_blank');
-        document.getElementById('contact-form').style.display = 'none';
-        document.getElementById('form-status').style.display = 'block';
-    }
-    window.sendMailto = sendMailto;
+    /* ===== CONTACT FORM — Powered by Formsubmit.co (direct to Gmail) ===== */
 
     /* ===== 3D TILT ON PROJECT CARDS (desktop only) ===== */
     if (window.innerWidth > 768) {
