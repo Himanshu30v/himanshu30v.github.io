@@ -111,24 +111,171 @@
         .hero-entrance-6{animation-delay:1.2s;}
         @keyframes hero-slide-up{to{opacity:1;transform:translateY(0);}}
 
-        /* Profile Portrait fully contained inside Neon Ring */
-        .profile-container{position:relative;width:240px;height:240px;margin:0 auto 25px;display:flex;align-items:center;justify-content:center;background:transparent;}
-        .profile-neon-aura{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:250px;height:250px;border-radius:50%;background:radial-gradient(circle, rgba(147,51,234,0.45) 0%, rgba(124,58,237,0.2) 50%, transparent 75%);filter:blur(35px);z-index:1;pointer-events:none;}
-        .profile-neon-ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:220px;height:220px;border-radius:50%;border:2px solid rgba(168,85,247,0.6);box-shadow:0 0 25px rgba(147,51,234,0.45), inset 0 0 15px rgba(147,51,234,0.3);z-index:3;pointer-events:none;animation:pulse-ring 4s ease-in-out infinite alternate;}
-        .profile-neon-ring-2{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(1.12);width:220px;height:220px;border-radius:50%;border:1px dashed rgba(192,132,252,0.25);z-index:1;pointer-events:none;animation:rotate-ring 30s linear infinite;}
+        /* ══════════════════════════════════════════════
+           PROFILE 3D HOLOGRAPHIC PORTRAIT
+           ══════════════════════════════════════════════ */
+        .profile-container {
+            position: relative;
+            width: 240px;
+            height: 240px;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            perspective: 1200px;
+            transform-style: preserve-3d;
+            cursor: pointer;
+            will-change: transform;
+        }
 
-        @keyframes pulse-ring{0%{transform:translate(-50%,-50%) scale(0.97);opacity:0.7;}100%{transform:translate(-50%,-50%) scale(1.03);opacity:1;}}
-        @keyframes rotate-ring{from{transform:translate(-50%,-50%) scale(1.12) rotate(0deg);}to{transform:translate(-50%,-50%) scale(1.12) rotate(360deg);}}
+        /* Ambient 3D Float when not actively tilted */
+        .profile-container:not(.is-tilting) {
+            animation: profileAmbient3D 6s ease-in-out infinite alternate;
+        }
 
-        .profile-photo-wrapper{position:relative;z-index:2;width:216px;height:216px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle, rgba(124,58,237,0.2) 0%, rgba(3,0,20,0.6) 80%);}
-        .profile-photo-wrapper img{width:100%;height:100%;object-fit:cover;object-position:center top;filter:drop-shadow(0 8px 16px rgba(0,0,0,0.5));}
+        @keyframes profileAmbient3D {
+            0%   { transform: perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(0px); }
+            33%  { transform: perspective(1200px) rotateX(4deg) rotateY(-6deg) translateY(-7px); }
+            66%  { transform: perspective(1200px) rotateX(-4deg) rotateY(5deg) translateY(-3px); }
+            100% { transform: perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(0px); }
+        }
 
-        /* Floating decorative particle dots */
-        .profile-deco{position:absolute;border-radius:50%;}
-        .profile-deco-1{width:10px;height:10px;background:var(--cyan);top:15px;right:25px;animation:float-deco 3s ease-in-out infinite alternate;box-shadow:0 0 12px var(--cyan);}
-        .profile-deco-2{width:8px;height:8px;background:var(--pink);bottom:35px;left:15px;animation:float-deco 2.5s ease-in-out 0.5s infinite alternate;box-shadow:0 0 10px var(--pink);}
-        .profile-deco-3{width:12px;height:12px;background:var(--violet);top:50%;left:0px;animation:float-deco 3.5s ease-in-out 1s infinite alternate;box-shadow:0 0 14px var(--violet);}
-        @keyframes float-deco{0%{transform:translateY(0) scale(1);}100%{transform:translateY(-12px) scale(1.3);}}
+        .profile-neon-aura {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) translateZ(-30px);
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.45) 0%, rgba(124, 58, 237, 0.22) 50%, transparent 75%);
+            filter: blur(35px);
+            z-index: 1;
+            pointer-events: none;
+            transition: transform 0.25s ease-out;
+        }
+
+        .profile-neon-ring-2 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) translateZ(12px) scale(1.12);
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            border: 1px dashed rgba(192, 132, 252, 0.35);
+            z-index: 2;
+            pointer-events: none;
+            animation: rotate-ring 30s linear infinite;
+            transition: transform 0.25s ease-out;
+        }
+
+        .profile-neon-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) translateZ(28px);
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            border: 2px solid rgba(168, 85, 247, 0.75);
+            box-shadow: 0 0 30px rgba(147, 51, 234, 0.55), inset 0 0 15px rgba(147, 51, 234, 0.35);
+            z-index: 4;
+            pointer-events: none;
+            animation: pulse-ring 4s ease-in-out infinite alternate;
+            transition: transform 0.25s ease-out, box-shadow 0.3s ease;
+        }
+
+        @keyframes pulse-ring {
+            0%   { transform: translate(-50%, -50%) translateZ(28px) scale(0.97); opacity: 0.75; }
+            100% { transform: translate(-50%, -50%) translateZ(28px) scale(1.03); opacity: 1; }
+        }
+        @keyframes rotate-ring {
+            from { transform: translate(-50%, -50%) translateZ(12px) scale(1.12) rotate(0deg); }
+            to   { transform: translate(-50%, -50%) translateZ(12px) scale(1.12) rotate(360deg); }
+        }
+
+        .profile-photo-wrapper {
+            position: relative;
+            z-index: 3;
+            width: 216px;
+            height: 216px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.25) 0%, rgba(3, 0, 20, 0.7) 80%);
+            transform: translateZ(20px);
+            transform-style: preserve-3d;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.65), 0 0 30px rgba(124, 58, 237, 0.25);
+            transition: transform 0.25s ease-out, box-shadow 0.3s ease;
+        }
+
+        .profile-photo-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6));
+            transition: transform 0.25s ease-out, filter 0.3s ease;
+        }
+
+        /* 3D Holographic Glare Overlay */
+        .profile-glare {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle at 50% 10%, rgba(255, 255, 255, 0.35) 0%, rgba(192, 132, 252, 0.15) 45%, transparent 75%);
+            mix-blend-mode: overlay;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            z-index: 5;
+        }
+
+        /* Floating 3D decorative particle dots */
+        .profile-deco {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            transition: transform 0.25s ease-out;
+        }
+        .profile-deco-1 {
+            width: 10px;
+            height: 10px;
+            background: var(--cyan);
+            top: 15px;
+            right: 25px;
+            transform: translateZ(48px);
+            animation: float-deco 3s ease-in-out infinite alternate;
+            box-shadow: 0 0 14px var(--cyan);
+        }
+        .profile-deco-2 {
+            width: 8px;
+            height: 8px;
+            background: var(--pink);
+            bottom: 35px;
+            left: 15px;
+            transform: translateZ(38px);
+            animation: float-deco 2.5s ease-in-out 0.5s infinite alternate;
+            box-shadow: 0 0 12px var(--pink);
+        }
+        .profile-deco-3 {
+            width: 12px;
+            height: 12px;
+            background: var(--violet);
+            top: 50%;
+            left: 0px;
+            transform: translateZ(52px);
+            animation: float-deco 3.5s ease-in-out 1s infinite alternate;
+            box-shadow: 0 0 16px var(--violet);
+        }
+        @keyframes float-deco {
+            0%   { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-12px) scale(1.3); }
+        }
 
         /* Animated gradient name */
         .hero-content h1{font-family:var(--font-heading);font-size:3.6rem;font-weight:800;line-height:1.15;margin-bottom:10px;}
@@ -728,6 +875,7 @@
             <div class="profile-neon-ring-2"></div>
             <div class="profile-photo-wrapper">
                 <img src="pic-nobg.png" alt="Himanshu Kumar Verma">
+                <div class="profile-glare"></div>
             </div>
             <div class="profile-deco profile-deco-1"></div>
             <div class="profile-deco profile-deco-2"></div>
@@ -1121,6 +1269,82 @@
             intro.remove();
             document.body.classList.remove('intro-active');
         }, 6800);
+    })();
+
+    /* ===== 3D PROFILE PICTURE TILT & PARALLAX ===== */
+    (function() {
+        const container = document.querySelector('.profile-container');
+        const wrapper = document.querySelector('.profile-photo-wrapper');
+        const img = wrapper ? wrapper.querySelector('img') : null;
+        const ring = document.querySelector('.profile-neon-ring');
+        const aura = document.querySelector('.profile-neon-aura');
+        const glare = document.querySelector('.profile-glare');
+
+        if (!container || window.innerWidth <= 768) return;
+
+        let isHovered = false;
+        let targetX = 0, targetY = 0;
+        let currentX = 0, currentY = 0;
+        let animId = null;
+
+        function renderTilt() {
+            currentX += (targetX - currentX) * 0.12;
+            currentY += (targetY - currentY) * 0.12;
+
+            if (isHovered || Math.abs(currentX) > 0.05 || Math.abs(currentY) > 0.05) {
+                container.classList.add('is-tilting');
+                container.style.transform = `perspective(1000px) rotateX(${currentX}deg) rotateY(${currentY}deg) scale3d(1.06, 1.06, 1.06)`;
+                
+                if (img) {
+                    img.style.transform = `translate3d(${-currentY * 0.4}px, ${currentX * 0.4}px, 15px)`;
+                }
+                if (ring) {
+                    ring.style.boxShadow = `0 0 ${30 + Math.abs(currentX) * 2}px rgba(168,85,247,0.7), inset 0 0 18px rgba(147,51,234,0.45)`;
+                }
+                if (aura) {
+                    aura.style.transform = `translate(-50%, -50%) translate3d(${currentY * 0.5}px, ${-currentX * 0.5}px, -30px)`;
+                }
+                animId = requestAnimationFrame(renderTilt);
+            } else {
+                container.classList.remove('is-tilting');
+                container.style.transform = '';
+                if (img) img.style.transform = '';
+                if (ring) ring.style.boxShadow = '';
+                if (aura) aura.style.transform = '';
+                cancelAnimationFrame(animId);
+                animId = null;
+            }
+        }
+
+        container.addEventListener('mouseenter', () => {
+            isHovered = true;
+            if (glare) glare.style.opacity = '1';
+            if (!animId) animId = requestAnimationFrame(renderTilt);
+        });
+
+        container.addEventListener('mousemove', (e) => {
+            const rect = container.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            targetX = ((y - centerY) / centerY) * -18;
+            targetY = ((x - centerX) / centerX) * 18;
+
+            if (glare) {
+                const glareX = (x / rect.width) * 100;
+                const glareY = (y / rect.height) * 100;
+                glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.4) 0%, rgba(192,132,252,0.15) 45%, transparent 75%)`;
+            }
+        });
+
+        container.addEventListener('mouseleave', () => {
+            isHovered = false;
+            targetX = 0;
+            targetY = 0;
+            if (glare) glare.style.opacity = '0';
+        });
     })();
 
     /* ===== CURSOR GLOW + BLOB PARALLAX ===== */
