@@ -459,7 +459,7 @@
             100% { transform: translate(-30px, 20px) scale(1.15); }
         }
 
-        /* Sequential Letter-by-Letter Cursive Hello */
+        /* Improved Signature Calligraphy Hello */
         .hello-wrap {
             position: absolute;
             left: 50%;
@@ -471,7 +471,7 @@
             align-items: center;
             justify-content: center;
             animation:
-                pulseHello 1.6s ease-in-out 2.5s infinite alternate,
+                pulseHello 1.6s ease-in-out 2.7s infinite alternate,
                 fadeHello .35s ease 4.7s forwards;
         }
 
@@ -488,51 +488,20 @@
             letter-spacing: 2px;
         }
 
-        .mask-stroke {
+        .hello-mask-path {
             fill: none;
             stroke: #ffffff;
-            stroke-width: 40;
+            stroke-width: 36;
             stroke-linecap: round;
             stroke-linejoin: round;
+            stroke-dasharray: 1200;
+            stroke-dashoffset: 1200;
+            animation: drawHello 2.4s cubic-bezier(.65, 0, .35, 1) 0.3s forwards;
         }
 
-        /* 1. Letter 'h': 0.3s -> 0.85s */
-        .mask-h {
-            stroke-dasharray: 320;
-            stroke-dashoffset: 320;
-            animation: drawLetter 0.55s cubic-bezier(0.45, 0, 0.2, 1) 0.3s forwards;
-        }
-
-        /* 2. Letter 'e': 0.85s -> 1.15s */
-        .mask-e {
-            stroke-dasharray: 140;
-            stroke-dashoffset: 140;
-            animation: drawLetter 0.30s cubic-bezier(0.45, 0, 0.2, 1) 0.85s forwards;
-        }
-
-        /* 3. Letter 'l1': 1.15s -> 1.55s */
-        .mask-l1 {
-            stroke-dasharray: 220;
-            stroke-dashoffset: 220;
-            animation: drawLetter 0.40s cubic-bezier(0.45, 0, 0.2, 1) 1.15s forwards;
-        }
-
-        /* 4. Letter 'l2': 1.55s -> 1.95s */
-        .mask-l2 {
-            stroke-dasharray: 220;
-            stroke-dashoffset: 220;
-            animation: drawLetter 0.40s cubic-bezier(0.45, 0, 0.2, 1) 1.55s forwards;
-        }
-
-        /* 5. Letter 'o': 1.95s -> 2.40s */
-        .mask-o {
-            stroke-dasharray: 220;
-            stroke-dashoffset: 220;
-            animation: drawLetter 0.45s cubic-bezier(0.45, 0, 0.2, 1) 1.95s forwards;
-        }
-
-        @keyframes drawLetter {
-            to { stroke-dashoffset: 0; }
+        @keyframes drawHello {
+            0%   { stroke-dashoffset: 1200; }
+            100% { stroke-dashoffset: 0; }
         }
 
         @keyframes pulseHello {
@@ -702,70 +671,22 @@
         <div class="intro-blob intro-blob-2"></div>
     </div>
 
-    <!-- Handwritten hello with Signature Calligraphy & 3D neon gradient (Letter-by-Letter) -->
+    <!-- Handwritten hello with Signature Calligraphy & 3D neon gradient -->
     <div class="hello-wrap">
         <svg viewBox="0 0 500 160" class="hello-svg">
             <defs>
                 <linearGradient id="helloGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stop-color="#06b6d4" />
-                    <stop offset="35%" stop-color="#c084fc" />
-                    <stop offset="70%" stop-color="#ec4899" />
+                    <stop offset="45%" stop-color="#c084fc" />
+                    <stop offset="80%" stop-color="#ec4899" />
                     <stop offset="100%" stop-color="#06b6d4" />
                 </linearGradient>
-
-                <!-- Letter H Mask -->
-                <mask id="maskH">
-                    <path class="mask-stroke mask-h"
-                          d="M 148 124 C 156 104, 164 68, 172 45 C 176 36, 184 36, 187 44 C 188 54, 177 82, 170 106 L 165 128 C 167 112, 174 88, 185 86 C 194 85, 198 100, 197 116 C 196 126, 202 128, 212 118" />
-                </mask>
-
-                <!-- Letter E Mask -->
-                <mask id="maskE">
-                    <path class="mask-stroke mask-e"
-                          d="M 212 118 C 219 110, 227 94, 232 88 C 236 84, 240 86, 237 94 C 232 105, 222 112, 224 121 C 226 128, 235 128, 243 122 C 247 119, 250 116, 253 114" />
-                </mask>
-
-                <!-- Letter L1 Mask -->
-                <mask id="maskL1">
-                    <path class="mask-stroke mask-l1"
-                          d="M 253 114 C 260 102, 269 68, 275 45 C 278 36, 285 36, 288 44 C 289 54, 280 82, 273 106 L 267 128 C 269 130, 275 129, 280 123 C 282 120, 283 116, 284 114" />
-                </mask>
-
-                <!-- Letter L2 Mask -->
-                <mask id="maskL2">
-                    <path class="mask-stroke mask-l2"
-                          d="M 284 114 C 291 102, 300 68, 306 45 C 309 36, 316 36, 319 44 C 320 54, 311 82, 304 106 L 298 128 C 300 130, 306 129, 311 123 C 313 120, 314 116, 315 114" />
-                </mask>
-
-                <!-- Letter O Mask -->
-                <mask id="maskO">
-                    <path class="mask-stroke mask-o"
-                          d="M 315 114 C 321 102, 329 88, 337 86 C 330 86, 320 102, 322 118 C 324 128, 333 130, 340 124 C 347 118, 349 104, 344 92 C 340 86, 332 88, 334 94 C 336 98, 342 98, 353 94 C 360 92, 368 92, 375 94" />
+                <mask id="helloMask">
+                    <path class="hello-mask-path"
+                          d="M 125 115 C 135 90 148 48 158 25 C 166 22 170 30 165 55 L 158 125 C 162 95 175 80 188 80 C 198 80 202 95 204 125 C 212 110 220 95 228 88 C 236 88 238 98 232 112 C 230 125 240 125 248 118 C 255 85 268 45 274 25 C 282 22 285 30 280 60 L 274 125 C 285 85 298 45 304 25 C 312 22 315 30 310 60 L 304 125 C 312 115 322 92 332 88 C 342 88 348 98 346 112 C 344 126 332 126 326 115 C 322 105 330 92 342 92 C 352 92 365 96 380 94" />
                 </mask>
             </defs>
-
-            <!-- Letter H -->
-            <g mask="url(#maskH)">
-                <text x="50%" y="65%" text-anchor="middle" dominant-baseline="middle" class="hello-calligraphy">hello</text>
-            </g>
-
-            <!-- Letter E -->
-            <g mask="url(#maskE)">
-                <text x="50%" y="65%" text-anchor="middle" dominant-baseline="middle" class="hello-calligraphy">hello</text>
-            </g>
-
-            <!-- Letter L1 -->
-            <g mask="url(#maskL1)">
-                <text x="50%" y="65%" text-anchor="middle" dominant-baseline="middle" class="hello-calligraphy">hello</text>
-            </g>
-
-            <!-- Letter L2 -->
-            <g mask="url(#maskL2)">
-                <text x="50%" y="65%" text-anchor="middle" dominant-baseline="middle" class="hello-calligraphy">hello</text>
-            </g>
-
-            <!-- Letter O -->
-            <g mask="url(#maskO)">
+            <g mask="url(#helloMask)">
                 <text x="50%" y="65%" text-anchor="middle" dominant-baseline="middle" class="hello-calligraphy">hello</text>
             </g>
         </svg>
